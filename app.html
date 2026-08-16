@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="theme-color" content="#E85D26"/>
+<title>RescueMe - Emergency App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,700;0,900;1,300;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<style>body.app-mode{overflow:hidden} #view-landing{display:none}</style>
+</head>
+<body class="app-mode">
+<div id="view-app">
+
+  <div class="screen active" id="screen-home">
+    <div style="padding:18px 18px 0;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <p style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase">RescueMe</p>
+        <h1 style="font-size:26px;font-weight:900;font-family:var(--font-head);color:var(--bark)">Emergency</h1>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="background:var(--red-l);color:var(--red);border-radius:8px;padding:5px 11px;font-size:10px;font-weight:800;border:1.5px solid #f0b0b0">🔴 SOS Mode</div>
+        <button onclick="exitApp()" style="width:32px;height:32px;border-radius:8px;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:13px" title="Back to home">🏠</button>
+      </div>
+    </div>
+    <div class="pad">
+      <div class="calm-bar fu">Stay calm. You can secure everything in seconds.</div>
+
+      <button class="big-btn bb-saffron fu fu1 pulse-wrap" onclick="go('secure')" style="position:relative;z-index:1">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><rect x="3" y="11" width="18" height="10" rx="3"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div><div class="lbl">Freeze Cards & Payments</div><div class="sub">Stop all transactions now</div></div>
+      </button>
+
+      <button class="big-btn bb-teal fu fu2" onclick="go('help')">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><path d="M22 16.9a18.3 18.3 0 0 1-5.1-.6 1 1 0 0 0-1 .24l-2.2 2.2a14.5 14.5 0 0 1-6.4-6.4l2.2-2.2a1 1 0 0 0 .24-1A18.3 18.3 0 0 1 9.1 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 19 19 0 0 0 19 19 1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/></svg></div>
+        <div><div class="lbl">Call Emergency Help</div><div class="sub">Local services & embassy · 112</div></div>
+      </button>
+
+      <button class="big-btn bb-green fu fu3" onclick="shareLocation()">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><circle cx="12" cy="10" r="4"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 14 8 14s8-8.6 8-14a8 8 0 0 0-8-8z"/></svg></div>
+        <div><div class="lbl">Share My Location</div><div class="sub">Send to trusted contacts instantly</div></div>
+      </button>
+
+      <button class="big-btn bb-teal fu fu4" onclick="go('nearby')">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div><div class="lbl">Find Nearby Help</div><div class="sub">Police, embassies, hospitals</div></div>
+      </button>
+
+      <p class="sect-lbl fu fu5">More actions</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px" class="fu fu5">
+        <button onclick="go('documents')" style="background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:13px 11px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;font-weight:700;font-size:13px;color:var(--bark);box-shadow:var(--sh-sm);text-align:left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round" width="20" height="20"><rect x="3" y="2" width="18" height="20" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 20h10"/><path d="M9 16h6"/></svg>Replace Documents
+        </button>
+        <button onclick="go('contacts')" style="background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:13px 11px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;font-weight:700;font-size:13px;color:var(--bark);box-shadow:var(--sh-sm);text-align:left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M20 20c0-4-3.6-7-8-7s-8 3-8 7"/></svg>Emergency Contacts
+        </button>
+        <button onclick="go('incident')" style="background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:13px 11px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;font-weight:700;font-size:13px;color:var(--bark);box-shadow:var(--sh-sm);text-align:left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>File Report
+        </button>
+        <button onclick="go('offline')" style="background:var(--warm-white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:13px 11px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;font-weight:700;font-size:13px;color:var(--bark);box-shadow:var(--sh-sm);text-align:left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.2" stroke-linecap="round" width="20" height="20"><path d="M12 2l9 4v5c0 5.2-3.8 10-9 12-5.2-2-9-6.8-9-12V6l9-4z"/></svg>Offline Guide
+        </button>
+      </div>
+      <div id="home-progress" style="display:none" class="info-box ib-green">
+        <strong>Actions completed:</strong><span id="home-progress-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-secure">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Secure My Accounts</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <button id="freeze-all-btn" class="big-btn bb-saffron" onclick="freezeAll()" style="justify-content:center;font-size:16px;font-weight:900;padding:17px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" width="24" height="24"><rect x="3" y="11" width="18" height="10" rx="3"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        &nbsp;Freeze Everything Now
+      </button>
+      <div id="freeze-confirm" style="display:none" class="confirm-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+        Your cards are now frozen.
+      </div>
+      <p class="sect-lbl">Financial Accounts</p>
+      <div class="tog-row"><div><div class="t-name">Debit Card</div><div class="t-hint">Primary account</div></div><button class="tog-sw" id="tog-debit" onclick="toggleCard(this,'debit')"></button></div>
+      <div class="tog-row"><div><div class="t-name">Credit Card</div><div class="t-hint">All credit lines</div></div><button class="tog-sw" id="tog-credit" onclick="toggleCard(this,'credit')"></button></div>
+      <div class="tog-row"><div><div class="t-name">Digital Wallets</div><div class="t-hint">Paytm, PhonePe, Google Pay</div></div><button class="tog-sw" id="tog-digital" onclick="toggleCard(this,'digital')"></button></div>
+      <div class="tog-row"><div><div class="t-name">Banking App</div><div class="t-hint">Lock remote access</div></div><button class="tog-sw" id="tog-banking" onclick="toggleCard(this,'banking')"></button></div>
+      <div style="height:1px;background:var(--border)"></div>
+      <p class="sect-lbl">Report Stolen Documents</p>
+      <div class="tog-row"><div><div class="t-name">Passport</div><div class="t-hint">Notify border control</div></div><button class="tog-sw off" id="tog-passport" onclick="toggleDoc(this,'passport')"></button></div>
+      <div class="tog-row"><div><div class="t-name">Driver's Licence</div><div class="t-hint">Flag as lost/stolen</div></div><button class="tog-sw off" id="tog-licence" onclick="toggleDoc(this,'licence')"></button></div>
+      <div class="tog-row"><div><div class="t-name">Aadhaar Card</div><div class="t-hint">Report to authorities</div></div><button class="tog-sw off" id="tog-nid" onclick="toggleDoc(this,'nid')"></button></div>
+      <div class="info-box ib-teal">💡 <strong>Tip:</strong> Call your bank's international line to confirm the freeze and request emergency cash transfer.</div>
+      <button onclick="go('safe')" style="background:var(--green);color:#fff;border:none;border-radius:var(--r-md);padding:14px;font-weight:800;font-size:14px;width:100%">View Safety Summary →</button>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-help">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Emergency Help</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:var(--teal-l);border-radius:8px;padding:5px 12px;font-weight:800;font-size:11px;color:var(--teal-d)">
+        📍 New Delhi · Emergency: 112
+      </div>
+      <a href="tel:112" onclick="markAction('help')" class="big-btn bb-saffron" style="display:flex">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><path d="M22 16.9a18.3 18.3 0 0 1-5.1-.6 1 1 0 0 0-1 .24l-2.2 2.2a14.5 14.5 0 0 1-6.4-6.4l2.2-2.2a1 1 0 0 0 .24-1A18.3 18.3 0 0 1 9.1 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 19 19 0 0 0 19 19 1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/></svg></div>
+        <div><div class="lbl">Call 112 — Emergency</div><div class="sub" style="color:rgba(255,255,255,.75)">Police, fire, ambulance</div></div>
+      </a>
+      <a href="tel:+911123792100" onclick="markAction('embassy')" class="big-btn bb-teal" style="display:flex">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M8 22V10"/><path d="M16 22V10"/><path d="M12 4l9 6H3l9-6z"/></svg></div>
+        <div><div class="lbl">Call Your Embassy</div><div class="sub">24/7 citizen support line</div></div>
+      </a>
+      <p class="sect-lbl">Trusted Contacts</p>
+      <div id="help-contacts-list"></div>
+      <button class="big-btn bb-green" onclick="shareLocation();markAction('location')" style="margin-top:2px">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="22" height="22"><circle cx="12" cy="10" r="4"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 14 8 14s8-8.6 8-14a8 8 0 0 0-8-8z"/></svg></div>
+        <div><div class="lbl">Share Live Location</div><div class="sub" style="color:rgba(255,255,255,.8)">Via WhatsApp or SMS</div></div>
+      </button>
+      <p class="sect-lbl">International Numbers</p>
+      <div id="intl-numbers"></div>
+      <div class="calm-bar">Help is nearby. You are not alone.</div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-nearby">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Nearby Help</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <div class="map-area">
+        <div class="map-grid-h" style="top:32%"></div><div class="map-grid-h" style="top:64%"></div>
+        <div class="map-grid-v" style="left:33%"></div><div class="map-grid-v" style="left:66%"></div>
+        <div class="map-dot map-you" style="top:50%;left:50%"></div>
+        <span class="map-lbl" style="top:58%;left:50%;color:var(--teal-d)">You</span>
+        <div class="map-dot" style="top:28%;left:65%;background:var(--saffron)"></div>
+        <span class="map-lbl" style="top:18%;left:64%;color:var(--saffron-d);font-size:7px">Police</span>
+        <div class="map-dot" style="top:22%;left:32%;background:var(--amber)"></div>
+        <span class="map-lbl" style="top:12%;left:28%;color:var(--turmeric);font-size:7px">Embassy</span>
+        <div class="map-dot" style="top:68%;left:26%;background:var(--green)"></div>
+        <span class="map-lbl" style="top:76%;left:22%;color:var(--green-d);font-size:7px">Hospital</span>
+        <div class="map-dot" style="top:70%;left:72%;background:var(--saffron)"></div>
+        <div style="position:absolute;bottom:8px;right:10px;display:flex;gap:7px">
+          <span style="display:flex;align-items:center;gap:3px;font-size:8px;font-weight:800"><span style="width:7px;height:7px;border-radius:50%;background:var(--saffron);display:inline-block"></span>Police</span>
+          <span style="display:flex;align-items:center;gap:3px;font-size:8px;font-weight:800"><span style="width:7px;height:7px;border-radius:50%;background:var(--amber);display:inline-block"></span>Embassy</span>
+          <span style="display:flex;align-items:center;gap:3px;font-size:8px;font-weight:800"><span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block"></span>Hospital</span>
+        </div>
+      </div>
+      <div class="pills">
+        <button class="pill on" onclick="filterPlaces('All',this)">All</button>
+        <button class="pill" onclick="filterPlaces('police',this)">Police</button>
+        <button class="pill" onclick="filterPlaces('embassy',this)">Embassy</button>
+        <button class="pill" onclick="filterPlaces('hospital',this)">Hospital</button>
+      </div>
+      <p class="sect-lbl" id="nearby-count">4 locations nearby</p>
+      <div id="places-list"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-safe" style="background:var(--green-l)">
+    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px 100px;text-align:center;gap:20px">
+      <div class="safe-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" width="40" height="40"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>
+        <h1 style="font-size:28px;font-weight:900;color:var(--green-d);font-family:var(--font-head)">You're safe.</h1>
+        <p style="font-size:15px;color:var(--green-d);opacity:.8;font-weight:600;margin-top:6px">Help is on the way. You handled this.</p>
+      </div>
+      <div style="width:100%;display:flex;flex-direction:column;gap:8px" id="safe-checklist"></div>
+      <div class="app-card" style="width:100%;text-align:center">
+        <p style="font-size:12px;color:var(--muted);font-weight:600;line-height:1.7">Your emergency session has been recorded.<br>Share the incident report with police or your bank.</p>
+      </div>
+      <div style="width:100%;display:flex;flex-direction:column;gap:8px">
+        <button onclick="go('incident')" style="background:var(--teal);color:#fff;border:none;border-radius:var(--r-md);padding:14px;font-weight:800;font-size:14px;width:100%">Generate Incident Report</button>
+        <button onclick="go('home')" style="background:var(--warm-white);color:var(--bark);border:1.5px solid var(--border);border-radius:var(--r-md);padding:14px;font-weight:700;font-size:14px;width:100%">Back to Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-contacts">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Emergency Contacts</span>
+      <button onclick="toggleAddForm()" style="width:36px;height:36px;border-radius:10px;background:var(--saffron);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+    <div class="pad">
+      <div id="add-contact-form" style="display:none;background:var(--saffron-l);border:1.5px solid var(--saffron-m);border-radius:var(--r-lg);padding:16px;gap:10px;flex-direction:column">
+        <p style="font-weight:800;font-size:14px;color:var(--saffron-d)">Add Contact</p>
+        <input class="field" id="c-name" type="text" placeholder="Full name *"/>
+        <input class="field" id="c-phone" type="tel" placeholder="+91 98765 43210 *"/>
+        <input class="field" id="c-rel" type="text" placeholder="Relation (e.g. Sister)"/>
+        <div style="display:flex;gap:8px">
+          <button onclick="addContact()" style="flex:1;background:var(--saffron);color:#fff;border:none;border-radius:10px;padding:10px;font-weight:800;font-size:14px">Save</button>
+          <button onclick="toggleAddForm()" style="flex:1;background:var(--warm-white);color:var(--bark);border:1.5px solid var(--border);border-radius:10px;padding:10px;font-weight:700;font-size:14px">Cancel</button>
+        </div>
+      </div>
+      <p class="sect-lbl" id="contacts-count">2 contacts saved</p>
+      <div id="contacts-list"></div>
+      <div class="info-box ib-amber" style="margin-top:4px">💡 Add contacts <strong>before</strong> traveling — they'll work offline too.</div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-incident">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Incident Report</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <div class="app-card" style="gap:8px;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-weight:700;font-size:13px">Completeness</span>
+          <span style="font-weight:800;font-size:13px;color:var(--saffron)" id="inc-pct">0/4</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="inc-bar" style="width:0%"></div></div>
+      </div>
+      <p class="sect-lbl">Incident Details</p>
+      <div><label class="field-lbl">What was stolen or lost?</label><input class="field" id="inc-what" type="text" placeholder="e.g. Wallet, passport, phone" oninput="updateIncidentBar()"/></div>
+      <div><label class="field-lbl">When did it happen?</label><input class="field" id="inc-when" type="text" placeholder="e.g. Today at 3:30 PM" oninput="updateIncidentBar()"/></div>
+      <div><label class="field-lbl">Where did it happen?</label><input class="field" id="inc-where" type="text" placeholder="e.g. India Gate, New Delhi" oninput="updateIncidentBar()"/></div>
+      <div><label class="field-lbl">Police reference / FIR number</label><input class="field" id="inc-ref" type="text" placeholder="Leave blank if not yet obtained"/></div>
+      <div><label class="field-lbl">Description of events</label><textarea class="field" id="inc-desc" rows="4" placeholder="Describe what happened in as much detail as you can remember..." oninput="updateIncidentBar()" style="resize:vertical;line-height:1.6"></textarea></div>
+      <p class="sect-lbl">Report Preview</p>
+      <div id="report-preview" style="background:var(--sand);border-radius:var(--r-md);border:1.5px solid var(--border);padding:14px 15px;font-family:monospace;font-size:11px;color:var(--muted);white-space:pre-wrap;line-height:1.7;max-height:180px;overflow-y:auto"></div>
+      <div id="inc-confirm" style="display:none" class="confirm-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+        Report copied to clipboard!
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button onclick="copyReport()" style="background:var(--teal);color:#fff;border:none;border-radius:var(--r-md);padding:14px;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Full Report
+        </button>
+        <button onclick="saveReport()" style="background:var(--green);color:#fff;border:none;border-radius:var(--r-md);padding:14px;font-weight:800;font-size:14px">Save Report</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-documents">
+    <div class="topbar">
+      <button class="back-btn" onclick="docBack()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title" id="doc-title">Document Replacement</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <div id="doc-home">
+        <div class="info-box ib-teal" style="margin-bottom:4px">Select a document and follow the step-by-step guide to get a replacement.</div>
+        <p class="sect-lbl">Select a document</p>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px">
+          <button class="big-btn bb-outline" onclick="showDocGuide('passport')">
+            <div class="ico" style="background:var(--teal-l)">🛂</div>
+            <div><div class="lbl">Passport</div><div class="sub" style="color:var(--muted)">5 steps · Embassy process</div></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-left:auto;width:16px;height:16px"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button class="big-btn bb-outline" onclick="showDocGuide('id')">
+            <div class="ico" style="background:var(--amber-l)">🪪</div>
+            <div><div class="lbl">Aadhaar Card</div><div class="sub" style="color:var(--muted)">3 steps · Aadhaar Seva Kendra</div></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-left:auto;width:16px;height:16px"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button class="big-btn bb-outline" onclick="showDocGuide('licence')">
+            <div class="ico" style="background:var(--saffron-l)">🚗</div>
+            <div><div class="lbl">Driver's Licence</div><div class="sub" style="color:var(--muted)">4 steps · Apply at RTO</div></div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" style="margin-left:auto;width:16px;height:16px"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <p class="sect-lbl" style="margin-top:12px">Essential tips</p>
+        <div id="doc-tips-list" style="display:flex;flex-direction:column;gap:7px;margin-top:6px"></div>
+      </div>
+      <div id="doc-guide" style="display:none"><div id="doc-guide-steps"></div></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-offline">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Offline Guide</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <div class="offline-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,248,240,.7)" stroke-width="2" stroke-linecap="round" width="18" height="18"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        This information works without internet access.
+      </div>
+      <p class="sect-lbl">What to do right now</p>
+      <div id="offline-steps-list" style="display:flex;flex-direction:column;gap:8px"></div>
+      <p class="sect-lbl">Key emergency numbers</p>
+      <div id="offline-numbers-list" style="display:flex;flex-direction:column;gap:7px"></div>
+      <p class="sect-lbl">Useful phrases (show your phone)</p>
+      <div id="offline-phrases-list" style="display:flex;flex-direction:column;gap:7px"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-settings">
+    <div class="topbar">
+      <button class="back-btn" onclick="back()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--saffron)" stroke-width="2.2" stroke-linecap="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="topbar-title">Settings</span>
+      <div class="topbar-right"></div>
+    </div>
+    <div class="pad">
+      <p class="sect-lbl">Your Location</p>
+      <div class="setting-row">
+        <div><p style="font-weight:700;font-size:14px;color:var(--bark)">Current City</p><p style="font-size:11px;color:var(--muted)">Affects emergency numbers shown</p></div>
+        <select id="set-country" class="field" style="width:auto;padding:6px 10px;font-size:13px" onchange="updateCountry(this.value)">
+          <option value="New Delhi|112">New Delhi</option>
+          <option value="Mumbai|112">Mumbai</option>
+          <option value="Bengaluru|112">Bengaluru</option>
+          <option value="Chennai|112">Chennai</option>
+          <option value="Kolkata|112">Kolkata</option>
+          <option value="Hyderabad|112">Hyderabad</option>
+          <option value="Ahmedabad|112">Ahmedabad</option>
+          <option value="Pune|112">Pune</option>
+          <option value="Jaipur|112">Jaipur</option>
+        </select>
+      </div>
+      <p class="sect-lbl">Quick actions</p>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <button onclick="go('contacts')" class="setting-row" style="width:100%;text-align:left"><span style="font-weight:700;font-size:14px;color:var(--bark)">Manage Emergency Contacts</span><svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button onclick="go('offline')" class="setting-row" style="width:100%;text-align:left"><span style="font-weight:700;font-size:14px;color:var(--bark)">View Offline Guide</span><svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button onclick="resetAll()" class="setting-row" style="width:100%;text-align:left"><span style="font-weight:700;font-size:14px;color:var(--red)">Reset All Emergency Data</span><svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <p class="sect-lbl">About</p>
+      <div class="app-card" style="text-align:center;gap:6px;display:flex;flex-direction:column">
+        <p style="font-weight:900;font-size:16px;font-family:var(--font-head)">RescueMe</p>
+        <p style="font-size:12px;color:var(--muted)">Emergency Response App v1.0</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.6">Designed to help travelers in crisis situations. Works offline. No data is sent to any server.</p>
+      </div>
+    </div>
+  </div>
+
+  <nav id="bottom-nav">
+    <button class="nav-btn active" id="nav-home" onclick="go('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home
+    </button>
+    <button class="nav-btn" id="nav-help" onclick="go('help')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9a18.3 18.3 0 0 1-5.1-.6 1 1 0 0 0-1 .24l-2.2 2.2a14.5 14.5 0 0 1-6.4-6.4l2.2-2.2a1 1 0 0 0 .24-1A18.3 18.3 0 0 1 9.1 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1 19 19 0 0 0 19 19 1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1z"/></svg>Help
+    </button>
+    <button class="nav-btn" id="nav-nearby" onclick="go('nearby')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Nearby
+    </button>
+    <button class="nav-btn" id="nav-incident" onclick="go('incident')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Report
+    </button>
+    <button class="nav-btn" id="nav-settings" onclick="go('settings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>More
+    </button>
+  </nav>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
